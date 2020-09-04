@@ -28,4 +28,4 @@
 
 ### DO NOT USE REAL MONEY TO TRADE THIS STRATEGY. THERE IS ABSOLUTELY NO GUARANTEE THIS STRATEGY WORKS.
 
-##### Note: When looking at the strategy on a chart, past occurances will not trigger until the close of the signal bar. This is just how Ninjatrader displays strategies in the past. However, live signals will be taken on the break of an inside bar.
+##### DISCLAIMER: When looking at the strategy on a chart, past occurances will not trigger until the close of the signal bar. This is just how Ninjatrader displays strategies in the past. However, live signals will be taken on the break of an inside bar. Additionally, some past signals may not show on the chart due to the signal bar 'failing' and reversing back across it's signal. This is not a holy grail. It is simply meant to be a template to help get you started with an automated strategy.
