@@ -70,10 +70,10 @@ namespace NinjaTrader.NinjaScript.Strategies {
                 ATRLength = 3;
                 ATRMultiplier = 2.0;
                 ContractQty = 1;
-                MorningStart = ToTime (6, 31, 00);
-                MorningEnd = ToTime (07, 30, 00);
-                AfternoonStart = ToTime (11, 30, 00);
-                AfternoonEnd = ToTime (12, 50, 00);
+                MorningStart = ToTime (6, 30, 00);
+                MorningEnd = ToTime (10, 00, 00);
+                AfternoonStart = ToTime (10, 00, 00);
+                AfternoonEnd = ToTime (12, 59, 00);
                 AfternoonClose = ToTime (12, 59, 00);
                 Offline = ToTime (13, 00, 00);
                 Dusk = ToTime (23, 59, 59);
@@ -185,14 +185,6 @@ namespace NinjaTrader.NinjaScript.Strategies {
                 if (CurrentBar < BarsRequiredToTrade) {
                     return;
                 }
-
-                ////////////////////////////////////
-                // ES VWAP
-                ////////////////////////////////////
-                double VWAPValue = OrderFlowVWAP (BarsArray[1], VWAPResolution.Standard, TradingHours, VWAPStandardDeviations.Three, 1, 2, 3).VWAP[0];
-
-                bool BullVWAP = Closes[1][0] > VWAPValue;
-                bool BearVWAP = Closes[1][0] < VWAPValue;
 
                 ////////////////////////////////////
                 // Check for weekday
