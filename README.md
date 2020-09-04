@@ -1,6 +1,6 @@
-# NinjaTrader Inside Bar Strategy
+# NinjaTrader Inside Bar
 
-### NinjaTrader 8 Inside Bar Automated Trading Strategy
+### Automated Trading Strategy
 
 ![Inside Bar](https://github.com/iniguezdj/ninjatrader_inside_strategy/blob/master/mes_5min.PNG)
 
@@ -27,4 +27,4 @@
 
 ### DO NOT USE REAL MONEY TO TRADE THIS STRATEGY. THERE IS ABSOLUTELY NO GUARANTEE THIS STRATEGY WORKS.
 
-#### Note: When looking at the strategy on a chart, past occurances will not trigger until the close of the signal bar. This is just how Ninjatrader displays strategies in the past. However, live signals will be taken on the break of an inside bar.
+##### Note: When looking at the strategy on a chart, past occurances will not trigger until the close of the signal bar. This is just how Ninjatrader displays strategies in the past. However, live signals will be taken on the break of an inside bar.
