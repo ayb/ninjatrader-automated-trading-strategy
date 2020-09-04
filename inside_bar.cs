@@ -42,12 +42,6 @@ namespace NinjaTrader.NinjaScript.Strategies {
         private Order initialStop = null;
         private Order stop = null;
         public int Lookback;
-        DateTime StartTime;
-        DateTime EndTime;
-        DateTime ExTime;
-        DateTime dtStartTime;
-        DateTime dtEndTime;
-        DateTime dtExTime;
         double LongLimit = 0.0;
         double ShortLimit = 0.0;
         public double RealizedPnL;
@@ -78,10 +72,7 @@ namespace NinjaTrader.NinjaScript.Strategies {
                 Offline = ToTime (13, 00, 00);
                 Dusk = ToTime (23, 59, 59);
                 Dawn = ToTime (00, 00, 59);
-                StartTime = DateTime.Parse ("06:30", System.Globalization.CultureInfo.InvariantCulture);
-                EndTime = DateTime.Parse ("06:38", System.Globalization.CultureInfo.InvariantCulture);
-                ExTime = DateTime.Parse ("12:59", System.Globalization.CultureInfo.InvariantCulture);
-                Calculate = Calculate.OnBarClose;
+                Calculate = Calculate.OnPriceChange; // Set to OnBarClose to wait until the bar closes
                 EntriesPerDirection = 1;
                 EntryHandling = EntryHandling.AllEntries;
                 IsExitOnSessionCloseStrategy = true;
@@ -105,7 +96,7 @@ namespace NinjaTrader.NinjaScript.Strategies {
                 ////////////////////////////////////
                 // Add ES Data Series
                 ////////////////////////////////////
-                AddDataSeries ("ES 09-20", BarsPeriodType.Minute, 1);
+                AddDataSeries ("ES 09-20", BarsPeriodType.Minute, 1); // Must update contract (12-20) when it rolls over quarterly
 
             } else if (State == State.DataLoaded) {
 
@@ -144,27 +135,18 @@ namespace NinjaTrader.NinjaScript.Strategies {
                         break;
                 }
 
-                dtStartTime = StartTime;
-                dtEndTime = EndTime;
-                dtExTime = ExTime;
-
             }
 
         }
 
         protected override void OnBarUpdate () {
 
-            DateTime dt = Time[0];
-            dtStartTime = new DateTime (dt.Year, dt.Month, dt.Day, dtStartTime.Hour, dtStartTime.Minute, dtStartTime.Second);
-            dtEndTime = new DateTime (dt.Year, dt.Month, dt.Day, dtEndTime.Hour, dtEndTime.Minute, dtEndTime.Second);
-            dtExTime = new DateTime (dt.Year, dt.Month, dt.Day, dtExTime.Hour, dtExTime.Minute, dtExTime.Second);
-
             ////////////////////////////////////
             // Check for 1st bar of session
             //////////////////////////////////// 
             if (Bars.IsFirstBarOfSession && IsFirstTickOfBar) {
 
-                // stuff
+                // Good to go
 
             }
 
@@ -221,14 +203,18 @@ namespace NinjaTrader.NinjaScript.Strategies {
                     // Market Closed
                     ////////////////////////////////////
                     if (ToTime (Time[0]) == Offline) {
+
                         Print (this.Name + " is OFFLINE " + Time[0].ToString ());
+
                     }
 
                     ////////////////////////////////////
                     // ETH
                     ////////////////////////////////////
                     if ((ToTime (Time[0]) >= Offline && ToTime (Time[0]) <= Dusk) || (ToTime (Time[0]) >= Dawn && ToTime (Time[0]) < MorningStart)) {
+
                         // ETH Globex Hours
+
                     }
 
                     ////////////////////////////////////
@@ -370,11 +356,15 @@ namespace NinjaTrader.NinjaScript.Strategies {
         protected override void OnOrderUpdate (Order order, double limitPrice, double stopPrice, int quantity, int filled, double averageFillPrice, OrderState orderState, DateTime time, ErrorCode error, string nativeError) {
 
             if (order.Name == "initialStop") {
+
                 initialStop = order;
+
             }
 
             if (order.Name == "stop") {
+
                 stop = order;
+
             }
 
             ////////////////////////////////////
@@ -383,8 +373,10 @@ namespace NinjaTrader.NinjaScript.Strategies {
             if (initialStop != null && initialStop == order) {
 
                 if (order.OrderState == OrderState.Cancelled) {
+
                     // Reset order
                     initialStop = null;
+
                 }
 
             }
@@ -395,8 +387,10 @@ namespace NinjaTrader.NinjaScript.Strategies {
             if (stop != null && stop == order) {
 
                 if (order.OrderState == OrderState.Cancelled) {
+
                     // Reset order
                     stop = null;
+
                 }
 
             }
