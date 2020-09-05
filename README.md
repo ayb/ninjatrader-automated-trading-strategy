@@ -10,21 +10,21 @@
 
 ### How To Use
 
-1. **Open Ninjatrader**
+1. Open Ninjatrader
 
-2. **From the Control Center, select New, Ninjascript Editor**
+2. From the Control Center, select New, Ninjascript Editor
 
-3. **Press +, select New Strategy, press Next, name it 'InsideBar', press Generate**
+3. Press +, select New Strategy, press Next, name it 'InsideBar', press Generate
 
-4. **Paste the code from 'inside_bar.cs' in the NinjaScript Editor window, Save and Compile**
+4. Paste the code from `inside_bar.cs` in the NinjaScript Editor window, Save and Compile
 
-5. **From the Control Center, select New, Chart, Instrument: /MES**
+5. From the Control Center, select New, Chart, Instrument: /MES
 
-6. **Righ-click the chart, select Strategies**
+6. Righ-click the chart, select Strategies
 
-7. **Add the 'InsideBar' strategy, make sure Account = SIM, press OK**
+7. Add the 'InsideBar' strategy, make sure Account = SIM, press OK
 
-8. **From the Control Center, press the Enabled checkbox to activate the strategy**
+8. From the Control Center, press the Enabled checkbox to activate the strategy
 
 ### DO NOT USE REAL MONEY TO TRADE THIS STRATEGY. THERE IS ABSOLUTELY NO GUARANTEE THIS STRATEGY WORKS.
 
